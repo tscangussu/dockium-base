@@ -58,7 +58,7 @@ class Gitium_Submenu_Configure extends Gitium_Menu {
 		}
 		check_admin_referer( 'gitium-admin' );
 		gitium_get_keypair( true );
-		$this->success_redirect( __( 'Keypair successfully regenerated.', 'gitium' ) );
+		//$this->success_redirect( __( 'Keypair successfully regenerated.', 'gitium' ) );
 	}
 
 	public function gitium_warning() {
@@ -99,7 +99,8 @@ class Gitium_Submenu_Configure extends Gitium_Menu {
 			$this->redirect( __( 'Please specify a valid repo.', 'gitium' ) );
 		}
 		if ( $this->init_process( $remote_url ) ) {
-			$this->success_redirect();
+			return true;
+			//$this->success_redirect( __( 'Repo successfully added.', 'gitium' ) );
 		} else {
 			global $git;
 			$this->redirect( __( 'Could not push to remote: ', 'gitium' ) . $remote_url . ' ERROR: ' . serialize( $git->get_last_error() ) );
@@ -129,7 +130,7 @@ class Gitium_Submenu_Configure extends Gitium_Menu {
 			$this->redirect( __( 'Could not merge the initial commit -> ', 'gitium' ) . $this->git->get_last_error() );
 		}
 		$this->git->push( $branch );
-		$this->success_redirect();
+		//$this->success_redirect();
 	}
 
 	private function setup_step_1_remote_url() {
